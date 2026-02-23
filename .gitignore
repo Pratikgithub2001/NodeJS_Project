@@ -6,6 +6,7 @@
 *.env
 
 # Ignore build or dist folders
+node_modules/
 dist/
 build/
 out/

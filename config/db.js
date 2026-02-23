@@ -2,7 +2,7 @@ import mysql from "mysql2";
 import dotenv from "dotenv";
 dotenv.config();
 
-// Create connection pool instead of single connection
+// Create connection pool
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -19,10 +19,13 @@ pool.getConnection((err, connection) => {
   if (err) {
     console.error("Database connection failed:", err);
   } else {
-    console.log("✅ Connected to MySQL database");
-    connection.release(); // Release the connection back to the pool
+    console.log("Connected to MySQL database");
+    connection.release();
   }
 });
 
-// Export promise-based pool for easier async/await usage
-export default pool.promise();
+// Export both promise-based pool and callback-based pool
+export default {
+  promise: pool.promise(),
+  callback: pool
+};
