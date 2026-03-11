@@ -6,6 +6,10 @@ import employeeRoutes from "./routes/employee-routes.js";
 const app = express()
 app.use(cors())
 
+app.get("/", (req, res) => {
+  res.send("API is running");
+});
+
 // IMPORTANT: Add both JSON and URL-encoded parsers
 app.use(express.json())              // For JSON payloads
 app.use(express.urlencoded({ extended: true }))  // For form-data and x-www-form-urlencoded
